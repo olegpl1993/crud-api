@@ -12,7 +12,7 @@ export const deleteRequest = (req: IncomingMessage, res: ServerResponse) => {
     if (index !== -1) {
       users.splice(index, 1);
       res.statusCode = 204;
-      res.end('User deleted');
+      res.end();
     } else {
       res.statusCode = 404;
       res.end('Not Found');
