@@ -17,7 +17,7 @@ export const router = () => (req: IncomingMessage, res: ServerResponse) => {
     postRequest(req, res);
   } else if (req.method === 'PUT' && req.url?.startsWith('/api/users/')) {
     putRequest(req, res);
-  } else if (req.method === 'DELETE ' && req.url === '/api/users/') {
+  } else if (req.method === 'DELETE' && req.url?.startsWith('/api/users/')) {
     deleteRequest(req, res);
   } else {
     res.statusCode = 404;
