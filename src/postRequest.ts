@@ -20,14 +20,18 @@ export const postRequest = (req: IncomingMessage, res: ServerResponse) => {
   });
 
   req.on('end', () => {
-    const newUser: User = JSON.parse(body);
-    if (isValidUserData(newUser)) {
-      const newdId = uuidv4();
-      newUser.id = newdId;
-      users.push(newUser);
-      res.statusCode = 201;
-      res.end('User created');
-    } else {
+    try {
+      const newUser: User = JSON.parse(body);
+      if (isValidUserData(newUser)) {
+        const newdId = uuidv4();
+        newUser.id = newdId;
+        users.push(newUser);
+        res.statusCode = 201;
+        res.end('User created');
+      } else {
+        throw new Error('Invalid user data');
+      }
+    } catch {
       res.statusCode = 400;
       res.end('Bad Request');
     }
