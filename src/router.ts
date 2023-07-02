@@ -1,12 +1,19 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { getRequest } from './getRequest';
+import { getAllUsers } from './getAllUsers';
 import { postRequest } from './postRequest';
 import { putRequest } from './putRequest';
 import { deleteRequest } from './deleteRequest';
+import { getUserByID } from './getUserByID';
 
 export const router = () => (req: IncomingMessage, res: ServerResponse) => {
-  if (req.method === 'GET' && req.url === '/api/users') {
-    getRequest(req, res);
+  if (req.method === 'GET' && req.url) {
+    if (req.url === '/api/users') {
+      getAllUsers(res);
+    }
+    if (req.url.startsWith('/api/users/')) {
+      const id = req.url.split('/').pop();
+      getUserByID(res, id);
+    }
   } else if (req.method === 'POST' && req.url === '/api/users') {
     postRequest(req, res);
   } else if (req.method === 'PUT' && req.url === '/api/users/') {
