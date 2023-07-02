@@ -1,5 +1,8 @@
 import { IncomingMessage, ServerResponse } from 'http';
-import { users, User } from './users';
+import { getRequest } from './getRequest';
+import { postRequest } from './postRequest';
+import { putRequest } from './putRequest';
+import { deleteRequest } from './deleteRequest';
 
 // import uuid from 'uuid';
 // const id = uuid.v4();
@@ -7,23 +10,13 @@ import { users, User } from './users';
 
 export const router = () => (req: IncomingMessage, res: ServerResponse) => {
   if (req.method === 'GET' && req.url === '/api/users') {
-    // Чтение списка пользователей
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(users));
+    getRequest(req, res);
   } else if (req.method === 'POST' && req.url === '/api/users') {
-    // Создание нового пользователя
-    let body = '';
-
-    req.on('data', (chunk) => {
-      body += chunk;
-    });
-
-    req.on('end', () => {
-      const newUser: User = JSON.parse(body);
-      users.push(newUser);
-      res.statusCode = 201;
-      res.end('User created');
-    });
+    postRequest(req, res);
+  } else if (req.method === 'PUT' && req.url === '/api/users/') {
+    putRequest(req, res);
+  } else if (req.method === 'DELETE ' && req.url === '/api/users/') {
+    deleteRequest(req, res);
   } else {
     res.statusCode = 404;
     res.end('Not Found');
