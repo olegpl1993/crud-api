@@ -1,16 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { users, User } from './users';
 import { v4 as uuidv4 } from 'uuid';
-
-const isValidUserData = (user: User) =>
-  user.username &&
-  typeof user.username === 'string' &&
-  user.age &&
-  typeof user.age === 'number' &&
-  user.hobbies &&
-  Array.isArray(user.hobbies) &&
-  user.hobbies.every((item) => typeof item === 'string') &&
-  Object.keys(user).length === 3;
+import { isValidUserData } from './isValidUserData';
 
 export const postRequest = (req: IncomingMessage, res: ServerResponse) => {
   let body = '';
@@ -33,7 +24,7 @@ export const postRequest = (req: IncomingMessage, res: ServerResponse) => {
       }
     } catch {
       res.statusCode = 400;
-      res.end('Bad Request');
+      res.end('Invalid user data');
     }
   });
 };
