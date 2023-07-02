@@ -21,6 +21,6 @@ export const router = () => (req: IncomingMessage, res: ServerResponse) => {
     deleteRequest(req, res);
   } else {
     res.statusCode = 404;
-    res.end('Not Found');
+    res.end('Invalid request');
   }
 };
