@@ -4,10 +4,6 @@ import { postRequest } from './postRequest';
 import { putRequest } from './putRequest';
 import { deleteRequest } from './deleteRequest';
 
-// import uuid from 'uuid';
-// const id = uuid.v4();
-// console.log(id);
-
 export const router = () => (req: IncomingMessage, res: ServerResponse) => {
   if (req.method === 'GET' && req.url === '/api/users') {
     getRequest(req, res);
