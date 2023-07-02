@@ -1,10 +1,13 @@
 import http from 'http';
 import { router } from './router';
+import dotenv from 'dotenv';
 
-// Создаем сервер
+dotenv.config();
+
+const { PORT } = process.env;
+
 const server = http.createServer(router());
 
-// Запускаем сервер на порте 4000
-server.listen(4000, () => {
-  console.log('Server is running on port 4000');
+server.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
