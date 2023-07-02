@@ -11,8 +11,7 @@ export const router = () => (req: IncomingMessage, res: ServerResponse) => {
       getAllUsers(res);
     }
     if (req.url.startsWith('/api/users/')) {
-      const id = req.url.replace('/api/users/', '');
-      getUserByID(res, id);
+      getUserByID(req, res);
     }
   } else if (req.method === 'POST' && req.url === '/api/users') {
     postRequest(req, res);

@@ -1,8 +1,9 @@
-import { ServerResponse } from 'http';
+import { ServerResponse, IncomingMessage } from 'http';
 import { users } from './users';
 import { uuidValidateV4 } from './uuidValidateV4';
 
-export const getUserByID = (res: ServerResponse, id: string | undefined) => {
+export const getUserByID = (req: IncomingMessage, res: ServerResponse) => {
+  const id = req.url?.replace('/api/users/', '');
   if (!id || !uuidValidateV4(id)) {
     res.statusCode = 400;
     res.end('Invalid userId');
