@@ -2,6 +2,16 @@ import { IncomingMessage, ServerResponse } from 'http';
 import { users, User } from './users';
 import { v4 as uuidv4 } from 'uuid';
 
+const isValidUserData = (user: User) =>
+  user.username &&
+  typeof user.username === 'string' &&
+  user.age &&
+  typeof user.age === 'number' &&
+  user.hobbies &&
+  Array.isArray(user.hobbies) &&
+  user.hobbies.every((item) => typeof item === 'string') &&
+  Object.keys(user).length === 3;
+
 export const postRequest = (req: IncomingMessage, res: ServerResponse) => {
   let body = '';
 
@@ -11,16 +21,7 @@ export const postRequest = (req: IncomingMessage, res: ServerResponse) => {
 
   req.on('end', () => {
     const newUser: User = JSON.parse(body);
-    if (
-      newUser.username &&
-      typeof newUser.username === 'string' &&
-      newUser.age &&
-      typeof newUser.age === 'number' &&
-      newUser.hobbies &&
-      Array.isArray(newUser.hobbies) &&
-      newUser.hobbies.every((item) => typeof item === 'string') &&
-      Object.keys(newUser).length === 3
-    ) {
+    if (isValidUserData(newUser)) {
       const newdId = uuidv4();
       newUser.id = newdId;
       users.push(newUser);
