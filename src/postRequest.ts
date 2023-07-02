@@ -20,11 +20,12 @@ export const postRequest = (req: IncomingMessage, res: ServerResponse) => {
         res.statusCode = 201;
         res.end('User created');
       } else {
-        throw new Error('Invalid user data');
+        res.statusCode = 400;
+        res.end('Invalid user data');
       }
     } catch {
-      res.statusCode = 400;
-      res.end('Invalid user data');
+      res.statusCode = 500;
+      res.end('Server error');
     }
   });
 };

@@ -30,12 +30,12 @@ export const putRequest = (req: IncomingMessage, res: ServerResponse) => {
           res.end('User updated');
         } else {
           res.statusCode = 404;
-          res.end('Not Found');
+          res.end('Not found user');
         }
       }
     } catch {
-      res.statusCode = 400;
-      res.end('Bad Request');
+      res.statusCode = 500;
+      res.end('Server error');
     }
   });
 };
