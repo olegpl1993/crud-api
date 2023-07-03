@@ -5,7 +5,7 @@ import { balancer } from './balancer';
 
 dotenv.config();
 const PORT = Number(process.env.PORT) || 4000;
-const { API_MODE } = process.env;
+const API_MODE = process.env.API_MODE || 'production';
 const isBalancer = API_MODE === 'cluster';
 
 const server = http.createServer(isBalancer ? balancer(PORT) : router());

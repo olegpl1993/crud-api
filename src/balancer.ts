@@ -1,5 +1,5 @@
 import os from 'os';
-import { IncomingMessage, ServerResponse } from 'http';
+import { router } from './router';
 
 const cpus = os.cpus();
 const numCPUs = cpus.length;
@@ -10,8 +10,6 @@ export const balancer = (PORT: number) => {
   ports.forEach((port, index) => {
     console.log(`Worker #${index} on port: ${port}`);
   });
-  return (req: IncomingMessage, res: ServerResponse) => {
-    console.log(req, res);
-    // TODO
-  };
+  return router();
+  // TODO: Implement balancer
 };

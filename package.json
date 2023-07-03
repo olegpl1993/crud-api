@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "cross-env API_MODE=development nodemon src/index.ts",
-    "start:prod": "cross-env API_MODE=production npm run build && node dist/bundle.js",
+    "start:prod": "npm run build && node dist/bundle.js",
     "start:multi": "cross-env API_MODE=cluster nodemon src/index.ts",
     "build": "webpack"
   },
@@ -33,6 +33,7 @@
     "prettier": "^2.8.8",
     "ts-loader": "^9.4.4",
     "webpack": "^5.88.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   }
 }
