@@ -29,3 +29,4 @@ Server answer with status code 404 and corresponding message if record with id =
 Server answer with status code 204 if the record is found and deleted\
 Server answer with status code 400 and corresponding message if userId is invalid (not uuid)\
 Server answer with status code 404 and corresponding message if record with id === userId doesn't exist\
+Server answer with status code 404 and corresponding message if record with id === userId doesn't exist\
