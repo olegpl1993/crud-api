@@ -4,8 +4,9 @@
   "description": "CRUD-API",
   "main": "index.js",
   "scripts": {
-    "start:dev": "cross-env NODE_ENV=development nodemon src/index.ts",
-    "start:prod": "cross-env NODE_ENV=production npm run build && node dist/bundle.js",
+    "start:dev": "cross-env API_MODE=development nodemon src/index.ts",
+    "start:prod": "cross-env API_MODE=production npm run build && node dist/bundle.js",
+    "start:multi": "cross-env API_MODE=cluster nodemon src/index.ts",
     "build": "webpack"
   },
   "author": "MarkerOK",
